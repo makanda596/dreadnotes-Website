@@ -1,0 +1,26 @@
+import Admin from "../../Schema/Admin/Admin.js"
+import bcrypt from "bcryptjs"
+
+export const AdminSignup= async (req,res)=>{
+    const {username,password}=req.body
+
+    try {
+        const alreadyUser = await Admin.findOne({username})
+        if(alreadyUser){
+            return res.json({message:"the user already exist"})
+        }
+        const hashPassword = await bcrypt.hash(password,10)
+       if(hashPassword <8){
+        res.json({message:"please your password is small"})
+       }
+
+       const admin = new Admin({
+        password:hashPassword,
+        username
+       })
+      admin.save()
+
+    } catch (error) {
+        
+    }
+}
