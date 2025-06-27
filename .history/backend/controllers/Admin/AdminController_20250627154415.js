@@ -1,9 +1,8 @@
 import Admin from "../../Schema/Admin/Admin.js"
 import bcrypt from "bcryptjs"
-import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 
-dotenv.config()
+
 export const AdminSignup = async (req, res) => {
     const { username, password } = req.body;
 
@@ -30,7 +29,7 @@ export const AdminSignup = async (req, res) => {
 
         await admin.save();
 
-        return res.status(201).json({ message: "Admin created successfully"});
+        return res.status(201).json({ message: "Admin created successfully" });
     } catch (error) {
         console.error("AdminSignup error:", error);
         return res.status(500).json({
@@ -45,8 +44,8 @@ export const AdminLogin = async (req,res)=>{
     const {username,password}=req.body
     const generateToken = (id)=>{
         try {
-            const token = jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: "1m" })
-            res.cookie("token",token,{
+            const token = jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: "15m" })
+            res.cookies("token",token,{
                 httpOnly:true,
                 sameSite:"strict",
                 maxAge:15*60*1000,
@@ -61,22 +60,18 @@ export const AdminLogin = async (req,res)=>{
     try {
         const admin = await Admin.findOne({username})
         if(!admin){
-          return  res.json({message:"no admin with this username found"})
+            res.json({message:"no admin with this username found"})
         }
         const comparePassword = await bcrypt.compare(password,admin.password)
         if(!comparePassword){
-            admin.limit +=1;
-            if (admin.limit >= 3) {
-                admin.timeLimit = new Date(Date.now() + 15*60*1000)
-            }
-            await admin.save()
-                 return      res.json({message:"invalid password"})
-                  
+            admin.limit+=1;
+                        res.json({message:"invalid password"})
+                        if(admin.limit >=3){
+                            admin.timeLimit = new Date(Date.now()+"15*60*1000")
+                        }
         }
-       
         admin.limit = 0,
         admin.timeLimit = null
-        await admin.save()
         res.json({message:"user succesfully logged in",
             token: generateToken(admin._id)
         })
@@ -88,9 +83,10 @@ export const AdminLogin = async (req,res)=>{
 
 export const logout = async (req,res)=>{
     try {
-        res.clearCookie("token",
+        res.clearCookies("token",
             {
                 httpOnly:true,
+                sameSite:none
             }
         )
         res.json({message:"admin logged out succesfully"})

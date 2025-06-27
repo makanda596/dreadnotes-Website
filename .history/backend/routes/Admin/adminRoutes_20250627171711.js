@@ -10,7 +10,7 @@ router.post('/adminSignup',AdminSignup)
 router.post('/adminLogin',AdminValidation,rateLimiter,AdminLogin)
 router.post('/adminlogout',logout)
 router.post('/postProduct', AdminverifyToken,postProduct)
-router.delete('/deleteProduct/:id',deleteProduct)
+router.delete('/deleteProduct',deleteProduct)
 
 
 export default router

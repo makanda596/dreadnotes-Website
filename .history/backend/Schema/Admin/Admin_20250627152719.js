@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const AdminSchema = new mongoose.Schema({
     username: {
         type: String,
-        unique: true, 
+        unique: true,
         required: true,
     },
     password: {
@@ -12,7 +12,6 @@ const AdminSchema = new mongoose.Schema({
         required: true,
     },
     limit: {
-        default:"0",
         type: Number,
     },
     timeLimit: {

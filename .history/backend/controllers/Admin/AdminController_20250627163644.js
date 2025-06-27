@@ -66,7 +66,10 @@ export const AdminLogin = async (req,res)=>{
         const comparePassword = await bcrypt.compare(password,admin.password)
         if(!comparePassword){
             admin.limit +=1;
+            console.log(admin)
             if (admin.limit >= 3) {
+                console.log("too many atempts")
+                console.log(admin)
                 admin.timeLimit = new Date(Date.now() + 15*60*1000)
             }
             await admin.save()
@@ -77,6 +80,7 @@ export const AdminLogin = async (req,res)=>{
         admin.limit = 0,
         admin.timeLimit = null
         await admin.save()
+        console.log(admin)
         res.json({message:"user succesfully logged in",
             token: generateToken(admin._id)
         })

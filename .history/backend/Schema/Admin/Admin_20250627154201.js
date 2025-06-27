@@ -12,7 +12,6 @@ const AdminSchema = new mongoose.Schema({
         required: true,
     },
     limit: {
-        default:"0",
         type: Number,
     },
     timeLimit: {

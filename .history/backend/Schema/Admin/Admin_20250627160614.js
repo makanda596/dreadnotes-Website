@@ -16,6 +16,7 @@ const AdminSchema = new mongoose.Schema({
         type: Number,
     },
     timeLimit: {
+        default:Date.now(),
         type: Date,
     },
 });

@@ -67,6 +67,7 @@ export const AdminLogin = async (req,res)=>{
         if(!comparePassword){
             admin.limit +=1;
             if (admin.limit >= 3) {
+                console.log("too many atempts")
                 admin.timeLimit = new Date(Date.now() + 15*60*1000)
             }
             await admin.save()
@@ -76,7 +77,6 @@ export const AdminLogin = async (req,res)=>{
        
         admin.limit = 0,
         admin.timeLimit = null
-        await admin.save()
         res.json({message:"user succesfully logged in",
             token: generateToken(admin._id)
         })
@@ -88,9 +88,10 @@ export const AdminLogin = async (req,res)=>{
 
 export const logout = async (req,res)=>{
     try {
-        res.clearCookie("token",
+        res.clearCookies("token",
             {
                 httpOnly:true,
+                sameSite:none
             }
         )
         res.json({message:"admin logged out succesfully"})
