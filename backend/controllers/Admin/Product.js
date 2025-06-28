@@ -1,4 +1,4 @@
-import Product from "../../Schema/Item.js"
+import Product from "../../Schema/Admin/Item.js"
 
 export const postProduct = async(req,res)=>{
     const {name,desc,status,category,size,price}=req.body
@@ -16,13 +16,25 @@ export const postProduct = async(req,res)=>{
             price
         })
         await product.save()
-        console.log(product)
         res.json({message:"product posted succesfully"})
     }catch(error){
         res.json(error.message)
     }
 }
 
+//count all the products avwailable
+
+export const countProduct = async (req,res)=>{
+    try {
+        const count = await Product.countDocuments()
+        if(count ==0) {
+            return res.status(400).json({message:"Zero products in the list"})
+        }
+        res.status(200).json(count)
+    } catch (error) {
+        res.status(201).json(error.message)
+    }
+}
 //DELETING OF  AN ITEM
 
 export const deleteProduct =async(req,res)=>{
@@ -42,7 +54,6 @@ export const deleteProduct =async(req,res)=>{
 //editing of a item
 export const editProduct = async(req,res)=>{
     const { name, desc, status, size, price } = req.body
-    // const p=req.body
     const {id} = req.params
     try{
         let editItem = {... req.body}
@@ -52,9 +63,7 @@ export const editProduct = async(req,res)=>{
             return res.status(404).json({message:"item not found with the ID"})
         }
         
-        
-        console.log(updatedItem)
-        res.json(updatedItem)
+        res.json({message:`the Product with this ID: ${id} has beeen updated`,updatedItem })
     }catch(error){
         res.status(400).json(error.message)
     }
