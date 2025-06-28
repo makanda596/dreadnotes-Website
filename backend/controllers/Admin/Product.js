@@ -23,6 +23,8 @@ export const postProduct = async(req,res)=>{
     }
 }
 
+//DELETING OF  AN ITEM
+
 export const deleteProduct =async(req,res)=>{
     const {id}=req.params
     try {
@@ -34,5 +36,26 @@ export const deleteProduct =async(req,res)=>{
     } catch (error) {
         res.json(error.message)
 
+    }
+}
+
+//editing of a item
+export const editProduct = async(req,res)=>{
+    const { name, desc, status, size, price } = req.body
+    // const p=req.body
+    const {id} = req.params
+    try{
+        let editItem = {... req.body}
+
+        const updatedItem = await Product.findByIdAndUpdate({_id: id} , editItem ,{new :true})
+        if(!updatedItem){
+            return res.status(404).json({message:"item not found with the ID"})
+        }
+        
+        
+        console.log(updatedItem)
+        res.json(updatedItem)
+    }catch(error){
+        res.status(400).json(error.message)
     }
 }

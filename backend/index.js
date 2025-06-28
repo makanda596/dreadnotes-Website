@@ -4,7 +4,9 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import express from "express";
 import cookieParser from "cookie-parser";
+import adminAllRoutes from './routes/Admin/adminAllRoutes.js'
 import adminRoutes from "./routes/Admin/adminRoutes.js";
+import {AdminVerifyToken} from './midlewares/AdminVerifyToken.js'
 
 dotenv.config();
 
@@ -28,6 +30,7 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 
 app.use("/admin", adminRoutes);
+app.use('/admin',adminAllRoutes)
 
 mongoose
     .connect(Mongo_URL)
