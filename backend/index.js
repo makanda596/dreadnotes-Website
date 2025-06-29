@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import adminAllRoutes from './routes/Admin/adminAllRoutes.js'
 import adminRoutes from "./routes/Admin/adminRoutes.js";
 import userauthRoutes from './routes/User/userauthRoutes.js'
-import {AdminVerifyToken} from './midlewares/AdminVerifyToken.js'
+import userRoutes from './routes/User/userRoutes.js'
 
 dotenv.config();
 
@@ -34,6 +34,7 @@ app.use("/admin", adminRoutes);
 app.use('/admin',adminAllRoutes)
 
 app.use('/auth',userauthRoutes)
+app.use('/user', userRoutes)
 
 mongoose
     .connect(Mongo_URL)

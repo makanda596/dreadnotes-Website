@@ -1,8 +1,7 @@
-// middlewares/loginValidate.js
 import { check, validationResult } from 'express-validator';
 
-export const AdminValidation = [
-    check('username')
+export const Validation = [
+    check('email')
         .isEmail()
         .withMessage('Please enter a valid email address'),
 
