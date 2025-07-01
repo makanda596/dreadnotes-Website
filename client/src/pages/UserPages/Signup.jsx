@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { userAuthStore } from "../utilis/user";
+import { userAuthStore } from "../../utilis/user";
+import { useNavigate } from "react-router-dom";
+
 
 export default function SignupForm() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -45,6 +48,7 @@ export default function SignupForm() {
                 fullPhone,
                 formData.password
             );
+            navigate('/email-verification')
             // Optionally clear form or redirect here
         } catch (err) {
             setError(err.response?.data?.message || "Signup failed");
