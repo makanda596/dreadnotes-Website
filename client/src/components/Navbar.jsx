@@ -1,20 +1,74 @@
 import { useState } from "react";
 
-// Simulate auth hook or prop
-// Replace this with your actual auth store or context
+// Mock auth hook (replace with your real auth/store)
 function useAuth() {
-  // For demo: user is null if logged out, or an object if logged in
-  const [user, setUser] = useState(true);
-
-  const login = () => setUser({ name: "Brian" });
+  const [user, setUser] = useState({ name: "Brian" }); // Logged in for demo
   const logout = () => setUser(null);
-
-  return { user, login, logout };
+  return { user, logout };
 }
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
+
+  // Simple icons as JSX for profile, cart, flashsale
+  const ProfileIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6 inline-block mr-1"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5.121 17.804A9 9 0 1112 21a9 9 0 01-6.879-3.196z"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+      />
+    </svg>
+  );
+
+  const CartIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6 inline-block mr-1"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3 3h2l.4 2M7 13h10l4-8H5.4"
+      />
+      <circle cx="7" cy="21" r="1" />
+      <circle cx="17" cy="21" r="1" />
+    </svg>
+  );
+
+  const FlashSaleIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6 inline-block mr-1"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M13 10V3L4 14h7v7l9-11h-7z"
+      />
+    </svg>
+  );
 
   return (
     <nav className="bg-blue-400 shadow-md">
@@ -28,7 +82,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8 items-center">
+          <div className="hidden md:flex space-x-6 items-center">
             <a
               href="/"
               className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-lg font-medium transition"
@@ -65,12 +119,38 @@ export default function Navbar() {
               </>
             ) : (
               <>
+                {/* Icons links */}
+                <a
+                  href="/cart"
+                  className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-lg font-medium transition flex items-center"
+                  title="Cart"
+                >
+                  {CartIcon} Cart
+                </a>
+
+                <a
+                  href="/flashsale"
+                  className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-lg font-medium transition flex items-center"
+                  title="Flash Sale"
+                >
+                  {FlashSaleIcon} FlashSale
+                </a>
+
                 <a
                   href="/profile"
+                  className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-lg font-medium transition flex items-center"
+                  title="Profile"
+                >
+                  {ProfileIcon} Profile
+                </a>
+
+                <a
+                  href="/account"
                   className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-lg font-medium transition"
                 >
-                  Profile
+                  Account
                 </a>
+
                 <button
                   onClick={() => {
                     logout();
@@ -168,11 +248,32 @@ export default function Navbar() {
             ) : (
               <>
                 <a
+                  href="/cart"
+                  className="block text-white px-3 py-2 rounded-md text-base font-medium hover:text-blue-200 transition flex items-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {CartIcon} Cart
+                </a>
+                <a
+                  href="/flashsale"
+                  className="block text-white px-3 py-2 rounded-md text-base font-medium hover:text-blue-200 transition flex items-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {FlashSaleIcon} FlashSale
+                </a>
+                <a
                   href="/profile"
+                  className="block text-white px-3 py-2 rounded-md text-base font-medium hover:text-blue-200 transition flex items-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {ProfileIcon} Profile
+                </a>
+                <a
+                  href="/account"
                   className="block text-white px-3 py-2 rounded-md text-base font-medium hover:text-blue-200 transition"
                   onClick={() => setIsOpen(false)}
                 >
-                  Profile
+                  Account
                 </a>
                 <button
                   onClick={() => {
