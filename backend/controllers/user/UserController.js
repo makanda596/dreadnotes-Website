@@ -19,3 +19,17 @@ export const getCart = async(req,res)=>{
         
     }
 }
+
+export const OneProduct = async (req,res)=>{
+    const {id}=req.params
+    try {
+        const product = await Product.findOne({_id:id})
+        if(!product){
+            return res.status(401).json({message:'no product found with this Id'})
+
+        }
+        res.status(200).json(product)
+    } catch (error) {
+        res.status(201).json(error.message)
+    }
+}

@@ -11,6 +11,7 @@ export const userAuthStore = create((set) => ({
     user: null,
     isLoading: false,
     products: [],
+    product:[],
 
     signup: async (fullName, email, phoneNumber, password) => {
         try {
@@ -77,4 +78,14 @@ export const userAuthStore = create((set) => ({
             throw error;
         }
     },
+    getOneProduct:async (id)=>{
+        try{
+            const res = await axios.get(`${API}/user/oneProduct/${id}`);
+            set({ product: res.data || [] });
+            console.log(res.data)
+        }catch(error){
+            set({ error: error.response?.data?.message || "Failed to fetch products" });
+            throw error;
+        }
+    }
 }));

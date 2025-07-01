@@ -76,12 +76,13 @@ const Products = () => {
                     <h3 className="text-2xl font-semibold text-blue-900 mb-2 truncate">
                       {item.name}
                     </h3>
-
                     <p className="text-indigo-700 font-bold text-xl mb-3">
                       ${item.price ?? "N/A"}
                     </p>
 
                     <p className="text-gray-600 flex-grow">{item.desc}</p>
+                    <a href={`/product/${item._id}`}>{item._id}</a>
+
                   </div>
                 ))
             ) : (
