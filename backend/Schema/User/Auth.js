@@ -15,12 +15,12 @@ const UserSchema = new mongoose.Schema({
         match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
     },
     phoneNumber: {
-        type: Number,
+        type: String,
         required: [true, "Phone number is required"],
         unique: true,
         validate: {
             validator: function (v) {
-                return /^\d{10,15}$/.test(v); 
+                return /^\+\d{3}\d{9}$/.test(v);
             },
             message: props => `${props.value} is not a valid phone number`
         }

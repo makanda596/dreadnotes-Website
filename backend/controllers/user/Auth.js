@@ -17,8 +17,16 @@ export const UserSignup = async(req,res)=>{
         if (exsitingphone) {
             return res.status(400).json({ message: "PhoneNumber Already taken" })
         }
+        
+        const phoneRegex = /^\+\d{3}\d{9}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+            return res.status(400).json({
+                message:
+                    "Invalid phone number",
+            });
+        }
         if(password.length <8){
-            return res.json({message:"password should be more than 8 characters"})
+            return res.status(400).json({message:"password should be more than 8 characters"})
         }
         const hashPassword = await bcrypt.hash(password,10)
         
@@ -29,7 +37,7 @@ export const UserSignup = async(req,res)=>{
             password: hashPassword,
         })
         await user.save()
-        res.status(200).json({message:"user created succesfully"})
+        res.status(200).json({message:"user created succesfully"        })
     } catch (error) {
         res.status(201).json(error.message)
     }
