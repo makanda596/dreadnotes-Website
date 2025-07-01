@@ -1,6 +1,7 @@
 import Admin from "../../Schema/Admin/Admin.js"
 import { User } from "../../Schema/User/Auth.js"
 import bcrypt from "bcryptjs"
+import jwt from 'jsonwebtoken'
 
 export const UserSignup = async(req,res)=>{
     const{fullName,phoneNumber,email,password,}=req.body
@@ -63,19 +64,18 @@ export const UserLogin = async(req,res)=>{
         }
     }
     try{
-        const user = await User.findOne({email}).select("-password","-email")
+        const user = await User.findOne({email})
         if(!user){
             return res.status(201).json({message:"email does not exist"})
         }
-        const comparePassword = await bcrypt.compare(user.password,password)
+        const comparePassword = await bcrypt.compare(password, user.password)
         if(!comparePassword){
             return res.status(401).json({message:"Invalid Password"})
         }
 
         user.lastLogin = Date.now()
-        res.status(200).json({message:"user logged in Succesfully"},{
-            token:generateToken(user._id)
-        })
+        res.status(200).json({message:"user logged in Succesfully",
+            token:generateToken(user._id)})
     }catch(error){
         res.status(400).json(error.message)
     }

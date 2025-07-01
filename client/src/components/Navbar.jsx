@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // Mock auth hook (replace with your real auth/store)
 function useAuth() {
-  const [user, setUser] = useState({ name: "Brian" }); // Logged in for demo
+  const [user, setUser] = useState(null); // Logged in for demo
   const logout = () => setUser(null);
   return { user, logout };
 }

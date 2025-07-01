@@ -5,4 +5,4 @@ const router = express.Router()
 
 router.get('/getProducts',getProducts)
 router.get('/getCart',getCart)
-export default router
+export default router 
