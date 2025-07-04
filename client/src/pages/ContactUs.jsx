@@ -12,6 +12,8 @@ import {
   ChevronDown,
   ChevronUp
 } from "lucide-react";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -77,6 +79,8 @@ export default function ContactPage() {
   ];
 
   return (
+    <div>
+      <Navbar/>
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
@@ -411,6 +415,8 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 }

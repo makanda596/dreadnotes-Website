@@ -114,7 +114,7 @@ export default function Navbar() {
                   <LogIn className="w-5 h-5 mr-2" /> Login
                 </a>
                 <a
-                  href="/register"
+                  href="/signup"
                   className={`flex items-center px-4 py-2 rounded-lg font-semibold shadow-md ${scrolled
                       ? "bg-gradient-to-r from-indigo-500 to-indigo-700 text-white"
                       : "bg-white text-indigo-600"
