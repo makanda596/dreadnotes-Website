@@ -99,7 +99,7 @@ export const deleteCart = async (req,res)=>{
         res.status(200).json({message:"item removed from the cart",cartItem})
 
     } catch (error) {
-        res.status(201)json(error.message)
+        res.status(201).json(error.message)
 
     }
 }

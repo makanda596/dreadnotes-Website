@@ -37,6 +37,7 @@ export const UserSignup = async(req,res)=>{
             email,
             password: hashPassword,
         })
+        console.log(user)
         await user.save()
         res.status(200).json({message:"user created succesfully"        })
     } catch (error) {
@@ -74,6 +75,8 @@ export const UserLogin = async(req,res)=>{
         }
 
         user.lastLogin = Date.now()
+        console.log(user)
+
         res.status(200).json({message:"user logged in Succesfully",
             token:generateToken(user._id)})
     }catch(error){

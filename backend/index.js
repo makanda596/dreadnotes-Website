@@ -8,6 +8,7 @@ import adminAllRoutes from './routes/Admin/adminAllRoutes.js'
 import adminRoutes from "./routes/Admin/adminRoutes.js";
 import userauthRoutes from './routes/User/userauthRoutes.js'
 import userRoutes from './routes/User/userRoutes.js'
+import {UserVerifyToken} from './midlewares/UserVerifyToken.js';
 
 dotenv.config();
 
@@ -34,7 +35,7 @@ app.use("/admin", adminRoutes);
 app.use('/admin',adminAllRoutes)
 
 app.use('/auth',userauthRoutes)
-app.use('/user', userRoutes)
+app.use('/user',UserVerifyToken, userRoutes)
 
 mongoose
     .connect(Mongo_URL)

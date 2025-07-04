@@ -1,5 +1,10 @@
 import React from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -10,6 +15,7 @@ const Footer = () => {
           <h2 className="text-2xl font-bold text-white mb-4">YourBrand</h2>
           <p className="text-sm leading-relaxed">
             Delivering quality custom merchandise to you.
+            <br />
             Designed with love, made for you.
           </p>
         </div>
@@ -36,6 +42,16 @@ const Footer = () => {
             <li>
               <a href="/faq" className="hover:text-white transition">
                 FAQ
+              </a>
+            </li>
+            <li>
+              <a href="/terms" className="hover:text-white transition">
+                Terms & Conditions
+              </a>
+            </li>
+            <li>
+              <a href="/privacy" className="hover:text-white transition">
+                Privacy Policy
               </a>
             </li>
           </ul>
@@ -67,24 +83,48 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
           <div className="flex space-x-4 text-gray-400">
-            <a href="#" aria-label="Facebook" className="hover:text-white transition">
+            <a
+              href="#"
+              aria-label="Facebook"
+              className="hover:text-white transition"
+            >
               <FaFacebookF size={20} />
             </a>
-            <a href="#" aria-label="Twitter" className="hover:text-white transition">
+            <a
+              href="#"
+              aria-label="Twitter"
+              className="hover:text-white transition"
+            >
               <FaTwitter size={20} />
             </a>
-            <a href="#" aria-label="Instagram" className="hover:text-white transition">
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="hover:text-white transition"
+            >
               <FaInstagram size={20} />
             </a>
-            <a href="#" aria-label="LinkedIn" className="hover:text-white transition">
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="hover:text-white transition"
+            >
               <FaLinkedinIn size={20} />
             </a>
           </div>
         </div>
       </div>
 
+      {/* Bottom bar */}
       <div className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} YourBrand. All rights reserved.
+        &copy; {new Date().getFullYear()} YourBrand. All rights reserved.{" "}
+        <a href="/terms" className="hover:underline text-gray-400 ml-2">
+          Terms
+        </a>{" "}
+        |{" "}
+        <a href="/privacy" className="hover:underline text-gray-400">
+          Privacy
+        </a>
       </div>
     </footer>
   );

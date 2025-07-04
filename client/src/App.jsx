@@ -7,7 +7,9 @@ import { userAuthStore } from './utilis/user';
 import EmailVerification from './pages/UserPages/emailVerification';
 import Guest from './pages/Guest';
 import OneProduct from './pages/UserPages/OneProduct ';
-
+import ContactUs from './pages/ContactUs.jsx';
+import About from './pages/About.jsx';
+import Terms from './pages/Terms.jsx'
 // Protected route wrapper
 const ProtectedRoutes = ({ children }) => {
   const { isAthenticated, isCheckingAuth } = userAuthStore();
@@ -31,6 +33,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Guest />} />
+        <Route path='/contact' element={<ContactUs/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/terms' element={<Terms/>}/>
         <Route path="/signup" element={<RedirectUser><Signup /></RedirectUser>} />
         <Route path="/login" element={<RedirectUser><Login /></RedirectUser>} />
         <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
