@@ -34,7 +34,10 @@ const UserSchema = new mongoose.Schema({
     lastLogin: {
         type: Date,
         default: null
-    }
+    },
+    cart:{type:mongoose.Schema.Types.ObjectId ,ref:"Cart"},
+    order:{type:mongoose.Schema.Types.ObjectId, ref:"Order"},
+    cancelledOrders: { type: mongoose.Schema.Types.ObjectId, ref: "CancelledOrder" }
 }, { timestamps: true });
 
 export const User = mongoose.model("User", UserSchema);

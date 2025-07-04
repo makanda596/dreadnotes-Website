@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const OneProduct = () => {
-    const { id } = useParams(); // get product ID from the URL
+    const { id } = useParams(); 
     const [product, setProduct] = useState([]);
     const [error, setError] = useState("");
 
