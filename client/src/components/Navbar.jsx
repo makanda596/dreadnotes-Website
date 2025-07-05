@@ -36,8 +36,8 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-          ? "bg-white shadow-lg py-2"
-          : "bg-gradient-to-r from-blue-600 to-indigo-700 py-3"
+          ? "bg-white shadow-lg py-1"
+          : "bg-gradient-to-r from-blue-600 to-indigo-700 py-1"
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,15 +49,15 @@ export default function Navbar() {
               className="flex items-center space-x-2"
             >
               <div className={`bg-white rounded-lg p-1 ${scrolled ? "shadow" : ""}`}>
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-700 w-8 h-8 rounded flex items-center justify-center">
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-700 w-6 h-6 rounded flex items-center justify-center">
                   <span className="text-white font-bold text-sm">DN</span>
                 </div>
               </div>
               <span
-                className={`font-bold text-2xl tracking-wide ${scrolled ? "text-indigo-700" : "text-white"
+                className={`font-bold text-lg tracking-wide ${scrolled ? "text-indigo-700" : "text-white"
                   }`}
               >
-                DreadNotes
+                DreadNotes Merchedise
               </span>
             </a>
           </div>
@@ -80,7 +80,7 @@ export default function Navbar() {
               <>
                 <a
                   href="/about"
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${scrolled
+                  className={`px-4 py-1 rounded-lg font-medium transition-all ${scrolled
                       ? "text-gray-700 hover:text-indigo-600 hover:bg-indigo-50"
                       : "text-white hover:text-blue-200 hover:bg-white/10"
                     }`}
@@ -287,7 +287,7 @@ export default function Navbar() {
               </a>
               <a
                 href="/register"
-                className={`flex items-center px-4 py-3 rounded-lg font-semibold ${scrolled
+                className={`flex items-center px-4 py-2 rounded-lg font-semibold ${scrolled
                     ? "bg-gradient-to-r from-indigo-500 to-indigo-700 text-white"
                     : "bg-white text-indigo-600"
                   } justify-center`}

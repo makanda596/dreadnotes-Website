@@ -11,7 +11,7 @@ const Guest = () => {
         <Navbar/>
         <Hero/>
         <Products/>
-      <Customize/>
+      {/* <Customize/> */}
       <Footer/>
     </div>
   )
