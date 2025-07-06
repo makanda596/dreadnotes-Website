@@ -1,21 +1,29 @@
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 import { User } from '../Schema/User/Auth.js';
-dotenv.config()
+
+dotenv.config();
 
 export const UserVerifyToken = async (req, res, next) => {
     try {
-        let token = req.headers.authorization?.split(" ")[1]; 
-        if (!token) {
-            return res.status(401).json({ message: "No token provided" });
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({ message: "No or invalid token format" });
         }
+
+        const token = authHeader.split(" ")[1];
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-        req.user = await User.findById(decoded.id).select('-password');
+        // Confirm user exists and is active (optional but safe)
+        const user = await User.findById(decoded.id).select("-password");
+        if (!user) {
+            return res.status(404).json({ message: "User no longer exists" });
+        }
 
+        req.user = user;
         next();
     } catch (error) {
-        res.status(403).json({ message: 'unathorized' });
+        return res.status(403).json({ message: "Unauthorized or token expired" });
     }
 };
-

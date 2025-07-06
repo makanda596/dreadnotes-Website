@@ -1,4 +1,4 @@
-import Product from "../../Schema/Admin/Item.js"
+import {Product} from "../../Schema/Admin/Item.js"
 
 export const postProduct = async(req,res)=>{
     const {name,desc,status,category,size,price}=req.body

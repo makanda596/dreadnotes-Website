@@ -29,11 +29,10 @@ const ProductSchema = new mongoose.Schema({
     size:{
         enum:["xm","sm","lg","l","xl"]
         },
-        // reviews:{
-        //     type:mongoose.Schema.Type.ObjectId,
-        //     ref:""
-        // }
+        reviews:{
+            type:mongoose.Schema.Type.ObjectId,
+            ref:"Reviews"
+        }
 },{timestamps:true})
 
-const Product = mongoose.model("Product",ProductSchema)
-export default Product
+export const Product = mongoose.model("Product",ProductSchema)

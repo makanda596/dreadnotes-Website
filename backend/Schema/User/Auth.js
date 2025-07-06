@@ -37,7 +37,14 @@ const UserSchema = new mongoose.Schema({
     },
     cart:{type:mongoose.Schema.Types.ObjectId ,ref:"Cart"},
     order:{type:mongoose.Schema.Types.ObjectId, ref:"Order"},
-    cancelledOrders: { type: mongoose.Schema.Types.ObjectId, ref: "CancelledOrder" }
+    cancelledOrders: { type: mongoose.Schema.Types.ObjectId, ref: "CancelledOrder" },
+    reviewStatus:{
+        type:Boolean,
+        default:"false"
+    },
+    review:{
+        type: {type: mongoose.Schema.Types.ObjectId, ref: "Review"}
+    }
 }, { timestamps: true });
 
 export const User = mongoose.model("User", UserSchema);

@@ -1,5 +1,5 @@
-import { User } from "../../../../SYSTEMS/BUYSELL - Copy/server/models/userModels.js"
-import Product from "../../Schema/Admin/Item.js"
+import {Product} from "../../Schema/Admin/Item.js"
+import { User } from "../../Schema/User/Auth.js"
 import { CancelledOrder } from "../../Schema/User/CancelledOrder.js"
 import { Cart } from "../../Schema/User/Cart.js"
 import { Order } from "../../Schema/User/Order.js"
@@ -17,10 +17,20 @@ export const getProducts = async(req,res)=>{
 }
 
 export const getCart = async(req,res)=>{
+    const {userId}=req.user.id
+
     try{
-        
+               const cart = await Cart.find(userId)
+        .populate({
+            path:"productId",
+            select:"name desc size price status category"
+        })
+        if(!cart){
+        return res.status(404).json({message:"no item found on the cart"})
+        }
+        res.status(200).json(cart)
     }catch(error){
-        
+        res.status(400).json(error.message)
     }
 }
 
@@ -38,42 +48,36 @@ export const OneProduct = async (req,res)=>{
     }
 }
 
-export const AddToCart = async (req,res)=>{
-    const { productId }=req.params
-    const {userId} = req.user.id 
+export const AddToCart = async (req, res) => {
+    const { productId } = req.params;
+    const userId = req.user.id;
+
     try {
-        const item = await Product.findById(productId)
-        if(!item){
-            return res.status(401).json({message:"no product with this id found"})
-        }
-        const user = await User.findById(userId)
-        if(!user){
-            return res.status(404).json({message:"please log in"})
-        }
-        const cartAlreadyExist = await Cart.findOne({
-            productId: productId,
-            userId:userId
-        })
-        if (cartAlreadyExist){
-            return res.status(401).json({message:"this cart item already exist"})
+        const item = await Product.findById(productId);
+        if (!item) {
+            return res.status(404).json({ message: "No product found with this ID" });
         }
 
-        const CartItem = new Cart({
-            productId,
-            userId
-        })
-        const savedItem =  await CartItem.save()
-        
-        await User.findByIdAndUpdate(userId,
-            {$push:{cart:savedItem._id}},{new:true}
-        )
-        res.status(200).json({message:"Item saved to cart succesfully",savedItem})
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(401).json({ message: "Please log in" });
+        }
+
+        const cartAlreadyExist = await Cart.findOne({ productId, userId });
+        if (cartAlreadyExist) {
+            return res.status(400).json({ message: "This item is already in your cart" });
+        }
+
+        const cartItem = new Cart({ productId, userId });
+        const savedItem = await cartItem.save();
+
+        await User.findByIdAndUpdate(userId, { $push: { cart: savedItem._id } }, { new: true });
+        console.log(user)
+        res.status(200).json({ message: "Item saved to cart successfully", savedItem });
     } catch (error) {
-        res.status(500).json(
-            error.message
-        );
+        res.status(500).json({ message: error.message });
     }
-}
+};
 
 export const CountCart = async (req,res)=>{
     const {userId}= req.params
@@ -107,7 +111,7 @@ export const makeOrder = async (req,res)=>{
     const {userId}= req.user.id
     const{productId}= req.params
     try {
-        const order= await Order.findById(productId)
+        const order= await Product.findById(productId)
         if(!order){
             return res.status(404).json({message:"no item with this id found"})
         }
@@ -122,9 +126,10 @@ export const makeOrder = async (req,res)=>{
 
        const orderdItem = await orderItem.save()
         await User.findByIdAndUpdate(userId, { $push: { order: orderdItem._id } }, { new: true }) 
+        
         res.status(200).json({message:"order made succesfully",orderdItem})
     } catch (error) {
-        res.status(201).json(error.message)
+        res.status(400).json(error.message)
     }
 }
 
