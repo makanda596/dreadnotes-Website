@@ -38,42 +38,73 @@ export const userAuthStore = create((set) => ({
     },
 
     login: async (email, password) => {
+        set({ isCheckingAuth: true, error: null });
         try {
+
             const res = await axios.post(`${API}/auth/userLogin`, { email, password });
+            localStorage.setItem("token", res.data.token);
 
-            if (!res.data.success) {
-                throw new Error(res.data.message || "Login failed");
-            }
-
-            if (res.data.token) {
-                localStorage.setItem("token", res.data.token);
-            } else {
-                console.warn("No token received from login");
-            }
-
+            // Update auth store
             set({
-                user: res.data.user,
+                user: res.data.user || null,
                 isCheckingAuth: false,
                 isAuthenticated: true,
                 error: null,
             });
-
             console.log(res.data.user);
+           
         } catch (error) {
+            const message =
+                error.response?.data?.message || error.response?.data || "Error logging in";
+
             set({
-                error: error.message || error.response?.data?.message || "Error logging in",
-                isLoading: false,
+                error: message,
+                isCheckingAuth: false,
+                isAuthenticated: false,
             });
-            throw error;
+
+            console.log("Login failed:", message);
+            throw new Error(message);
+        }
+          
+    },
+      
+    profile: async () => {
+        try {
+            const token = localStorage.getItem("token")
+            if (!token) {
+                set({ error: true })
+                console.log("no token")
+            }
+            const response = await axios.get(`${API}/auth/profile`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            set({ user: response.data.user })
+            console.log(response.data.user)
+        } catch (error) {
+            console.error(error)
         }
     },
-
+    Logout:async()=>{
+        try{
+            await axios.post(`${API}/auth/logout`,{},{withCredentials:true})
+            localStorage.removeItem("token")
+            set({
+                user:null,
+                isAuthenticated:false,
+                error:null
+            })
+            console.log("user logged out succesfully")
+        }catch(error){
+            set({error:error.response?.data?.message || "Error logging out"})
+        }
+    },
     getProducts: async () => {
         try {
-            const res = await axios.get(`${API}/user/getProducts`);
+            const res = await axios.get(`${API}/auth/getProducts`);
             set({ products: res.data || [] });
             console.log( res.data)
-        } catch (error) {
+        } catch (error) {  
             set({ error: error.response?.data?.message || "Failed to fetch products" });
             throw error;
         }
@@ -87,5 +118,35 @@ export const userAuthStore = create((set) => ({
             set({ error: error.response?.data?.message || "Failed to fetch products" });
             throw error;
         }
-    }
+    },
+    checkAuth: async () => {
+        set({ isCheckingAuth: true, error: null });
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                set({ isAuthenticated: false, isCheckingAuth: false });
+                return;
+            }
+
+            const response = await axios.get(`${API}/auth/check-auth`, {
+                headers: { Authorization: `Bearer ${token}` },
+                withCredentials: true
+            });
+
+            set({
+                user: response.data.user,
+                isAuthenticated: response.data.user,
+                isCheckingAuth: false
+            });
+
+          
+        } catch (error) {
+            localStorage.removeItem("token");
+            set({
+                isAuthenticated: false,
+                isCheckingAuth: false,
+                error: error.response?.data?.message || "Failed to authenticate",
+            });
+        }
+    },
 }));

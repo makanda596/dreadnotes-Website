@@ -83,25 +83,23 @@ export default function ContactPage() {
       <Navbar/>
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700">
+        <div className="text-center mb-6">
+          <h1 className="text-lg md:text-2xl font-extrabold text-gray-900 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700">
             Contact DreadNotes Merchandise
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We're here to help with any questions about our merchandise. Our Nairobi-based team is ready to assist you!
           </p>
-          <div className="mt-6 flex justify-center">
+          <div className="mt-4 flex justify-center">
             <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-1 w-24 rounded-full"></div>
           </div>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Contact Form */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
             <div className="p-8 sm:p-10">
-              <div className="mb-10">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Send us a message</h2>
+              <div className="mb-4">
+                <h2 className="text-xl font-bold text-gray-900 mb-2">Send us a message</h2>
                 <p className="text-gray-600">
                   Fill out the form and our team will get back to you within 24 hours.
                 </p>
@@ -122,7 +120,7 @@ export default function ContactPage() {
               ) : null}
 
               <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                       Full Name
@@ -134,8 +132,8 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                      placeholder="John Doe"
+                      className="w-full px-4 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                      placeholder="kevin hillary"
                     />
                   </div>
                   <div>
@@ -149,13 +147,13 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
-                      placeholder="john@example.com"
+                      className="w-full px-4 py-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                      placeholder="youremail@gmail.com"
                     />
                   </div>
                 </div>
 
-                <div className="mb-6">
+                <div className="mb-4">
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
                     Subject
                   </label>
@@ -166,12 +164,12 @@ export default function ContactPage() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                     placeholder="How can we help?"
                   />
                 </div>
 
-                <div className="mb-6">
+                <div className="mb-4">
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                     Your Message
                   </label>
@@ -190,7 +188,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition flex items-center justify-center ${isSubmitting
+                  className={`w-full py-2 px-6 rounded-lg font-semibold text-white transition flex items-center justify-center ${isSubmitting
                       ? "bg-indigo-400 cursor-not-allowed"
                       : "bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 shadow-lg"
                     }`}
@@ -210,27 +208,25 @@ export default function ContactPage() {
               </form>
             </div>
 
-            {/* Contact Information */}
             <div className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-8 sm:p-10 relative overflow-hidden">
-              {/* Decorative elements */}
               <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-blue-500 opacity-20"></div>
               <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-indigo-500 opacity-20"></div>
 
-              <div className="relative z-10">
-                <div className="mb-10">
-                  <h2 className="text-2xl font-bold mb-2">Our Nairobi Headquarters</h2>
+              <div className="relative z-4">
+                <div className="mb-8">
+                  <h2 className="text-xl font-bold mb-1">Our Nairobi Headquarters</h2>
                   <p className="text-blue-100">
                     Visit us or reach out - we'd love to connect with you!
                   </p>
                 </div>
 
-                <div className="space-y-6 mb-12">
+                <div className="space-y-6 mb-4">
                   <div className="flex items-start">
                     <div className="flex-shrink-0 bg-blue-500 p-3 rounded-lg">
                       <MapPin className="h-6 w-6" />
                     </div>
                     <div className="ml-4">
-                      <h3 className="text-lg font-semibold">Our Location</h3>
+                      <h3 className="text-md font-semibold">Our Location</h3>
                       <p className="mt-1 text-blue-100">
                         The Hub, Karen<br />
                         Langata Road, Nairobi<br />
@@ -240,11 +236,11 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start">
-                    <div className="flex-shrink-0 bg-blue-500 p-3 rounded-lg">
+                    <div className="flex-shrink-0 bg-blue-500 p-2 rounded-lg">
                       <Phone className="h-6 w-6" />
                     </div>
                     <div className="ml-4">
-                      <h3 className="text-lg font-semibold">Phone Number</h3>
+                      <h3 className="text-md font-semibold">Phone Number</h3>
                       <p className="mt-1 text-blue-100">
                         +254 700 123 456
                       </p>
@@ -252,11 +248,11 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start">
-                    <div className="flex-shrink-0 bg-blue-500 p-3 rounded-lg">
+                    <div className="flex-shrink-0 bg-blue-500 p-2 rounded-lg">
                       <Mail className="h-6 w-6" />
                     </div>
                     <div className="ml-4">
-                      <h3 className="text-lg font-semibold">Email Address</h3>
+                      <h3 className="text-md font-semibold">Email Address</h3>
                       <p className="mt-1 text-blue-100">
                         support@dreadnotes.co.ke
                       </p>
@@ -268,7 +264,7 @@ export default function ContactPage() {
                       <Clock className="h-6 w-6" />
                     </div>
                     <div className="ml-4">
-                      <h3 className="text-lg font-semibold">Business Hours</h3>
+                      <h3 className="text-md font-semibold">Business Hours</h3>
                       <p className="mt-1 text-blue-100">
                         Monday - Friday: 9AM - 6PM<br />
                         Saturday: 10AM - 4PM<br />
@@ -279,7 +275,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+                  <h3 className="text-lg font-semibold mb-2">Follow Us</h3>
                   <div className="flex space-x-4">
                     <a
                       href="#"
@@ -315,7 +311,6 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Map Section */}
           <div className="bg-gray-50 p-8 border-t">
             <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
               <MapPin className="h-6 w-6 text-indigo-600 mr-2" />
@@ -339,19 +334,18 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* FAQ Section */}
-        <div className="mt-16 max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
-            <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
+        <div className="mt-8 max-w-4xl mx-auto">
+          <div className="text-center mb-4">
+            <h2 className="text-lg font-bold text-gray-900">Frequently Asked Questions</h2>
+            <p className="text-gray-600 mt-2 max-w-2xl mx-auto">
               Find answers to common questions about our merchandise, shipping, and services in Kenya.
             </p>
-            <div className="mt-4 flex justify-center">
+            <div className="mt-2 flex justify-center">
               <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-1 w-16 rounded-full"></div>
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-2">
             {faqItems.map((item, index) => (
               <div
                 key={index}
@@ -359,10 +353,10 @@ export default function ContactPage() {
               >
                 <button
                   onClick={() => toggleQuestion(index)}
-                  className="w-full flex justify-between items-center p-5 text-left focus:outline-none"
+                  className="w-full flex justify-between items-center p-3 text-left focus:outline-none"
                 >
-                  <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                    <span className="bg-blue-100 text-blue-600 rounded-lg p-2 mr-3">
+                  <h3 className="text-md font-semibold text-gray-900 flex items-center">
+                    <span className="bg-blue-100 text-blue-600 rounded-lg p-1 mr-3">
                       <MessageSquare className="h-5 w-5" />
                     </span>
                     {item.question}
@@ -376,7 +370,7 @@ export default function ContactPage() {
                   className={`px-5 pb-5 transition-all duration-300 ease-in-out ${activeQuestion === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
                     }`}
                 >
-                  <div className="pl-12 pr-4 text-gray-600 border-t border-gray-100 pt-4">
+                  <div className="pl-12 pr-4 text-gray-600 border-t border-gray-100 pt-1">
                     {item.answer}
                   </div>
                 </div>
@@ -385,27 +379,26 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="mt-20 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl shadow-xl overflow-hidden">
-          <div className="px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20">
+        <div className="mt-4 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl shadow-xl overflow-hidden">
+          <div className="px-6 py-4 sm:px-12 sm:py-16 lg:px-16 lg:py-20">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl font-bold text-white sm:text-3xl">
+              <h2 className="text-xl font-bold text-white sm:text-xl">
                 Still have questions?
               </h2>
-              <p className="mt-4 text-blue-100 max-w-xl mx-auto">
+              <p className="mt-2 text-blue-100 max-w-xl mx-auto">
                 Our customer support team is available to help you with any inquiries about our merchandise.
               </p>
-              <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+              <div className="mt-4  flex grid-col-2 sm:flex-row justify-center gap-4">
                 <a
                   href="tel:+254700123456"
-                  className="flex items-center justify-center px-6 py-3 bg-white text-indigo-600 font-medium rounded-lg shadow hover:bg-gray-100 transition"
+                  className="flex items-center justify-center px-4 py-1 bg-white text-indigo-600 font-medium rounded-lg shadow hover:bg-gray-100 transition"
                 >
                   <Phone className="h-5 w-5 mr-2" />
                   Call Us Now
                 </a>
                 <a
                   href="mailto:support@dreadnotes.co.ke"
-                  className="flex items-center justify-center px-6 py-3 bg-indigo-800 text-white font-medium rounded-lg hover:bg-indigo-900 transition"
+                  className="flex items-center justify-center px-6 py-2 bg-indigo-800 text-white font-medium rounded-lg hover:bg-indigo-900 transition"
                 >
                   <Mail className="h-5 w-5 mr-2" />
                   Email Support

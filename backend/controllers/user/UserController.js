@@ -108,25 +108,25 @@ export const deleteCart = async (req,res)=>{
     }
 }
 export const makeOrder = async (req,res)=>{
-    const {userId}= req.user.id
+    const userId= req.user.id
     const{productId}= req.params
     try {
         const order= await Product.findById(productId)
         if(!order){
             return res.status(404).json({message:"no item with this id found"})
         }
-        const timeCheck = new Date(Date.now()+"15*60*1000")
-        if (order.time > timeCheck ){
+        const timeCheck = new Date(Date.now()+1*60*1000)
+        if (order.timeUntil > timeCheck ){
             return res.status(201).json({message:"you cant cancel the order now because your time has elapsed"})
         }
         const orderItem = new Order({
             userId:userId,
+            timeUntil:timeCheck,
             productId:productId,
         })
 
        const orderdItem = await orderItem.save()
         await User.findByIdAndUpdate(userId, { $push: { order: orderdItem._id } }, { new: true }) 
-        
         res.status(200).json({message:"order made succesfully",orderdItem})
     } catch (error) {
         res.status(400).json(error.message)
@@ -134,9 +134,9 @@ export const makeOrder = async (req,res)=>{
 }
 
 export const countOrder = async (req,res)=>{
-    const {userId}=req.user.id
+    const userId=req.user.id
     try {
-        const countOrder = await Order.countDocuments(userId)
+        const countOrder = await Order.countDocuments({userId:userId})
         res.status(200).json({message:`you got ${countOrder}`,countOrder})
     } catch (error) {
         res.status(201).json(error.message)
@@ -147,8 +147,8 @@ export const getOrder = async (req,res)=>{
     const {userId}= req.user.id
     try {
         const order = await Order.find({}).sort({createdAt:-1})
+        .populate({path:"productId",select:"name desc size price status category"})
         if(!order){
-
             return res.status(401).json({message:"no order found"})
         }
         res.status(200).json({message:"succesfully fettched the orders",order})
@@ -158,24 +158,44 @@ export const getOrder = async (req,res)=>{
     }
 }
 
-export const cancelOrder = async (req,res)=>{
-    const {userId} = req.user.id
-    const {_id:orderId} = req.params
-    try{
-        const order = await Order.findOneAndDelete({userId,orderId})
-        if(!order){
-            return res.status(401).json({message:"no order found with the ID"})
+
+
+export const cancelOrder = async (req, res) => {
+    const userId = req.user.id
+    const { orderId } = req.params
+
+    try {
+        const order = await Order.findOne({ _id: orderId, userId })
+
+        if (!order) {
+            return res.status(404).json({ message: "No order found with this ID for this user." })
         }
 
-        await User.findByIdAndUpdate(userId,{$pull:{order:order._id}},{new:true})
-        await order.save()
-        const orderCancelled = new CancelledOrder({
-            orderId,
-            userId:userId
+        const now = new Date()
+        if (now > order.timeUntil) {
+            return res.status(403).json({ message: "Cancellation time has elapsed." })
+        }
+
+        await Order.findByIdAndDelete(orderId)
+
+        await User.findByIdAndUpdate(userId, {
+            $pull: { orders: order._id }
         })
+
+        const orderCancelled = new CancelledOrder({
+            orderId: order._id,
+            userId: userId
+        })
+
         await orderCancelled.save()
-        res.status(200).json({message:"order succesfully cancelled waiting for the approval",orderCancelled})
-    }catch(error){
-        res.status(201).json(error.message)
+
+        res.status(200).json({
+            message: "Order cancelled successfully, pending approval.",
+            orderCancelled
+        })
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: error.message })
     }
 }

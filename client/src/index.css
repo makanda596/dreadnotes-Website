@@ -1,1 +1,13 @@
 @import "tailwindcss";
+/* Add to your global CSS file */
+@supports (backdrop-filter: blur(10px)) {
+  .backdrop-blur-lg {
+    backdrop-filter: blur(16px);
+  }
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+  .backdrop-blur-lg {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}

@@ -5,8 +5,7 @@ import { MdPayment, MdLocalShipping, MdSecurity } from "react-icons/md";
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-gray-300">
-      {/* Trust badges section */}
-      <div className="bg-gray-800 py-6">
+      <div className="bg-gray-800 py-4">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="flex items-center space-x-3">
@@ -52,21 +51,19 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Main footer content */}
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-        {/* Brand info */}
+      <div className="max-w-7xl mx-auto px-6 py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-2">
           <div className="flex items-center mb-4">
             <div className="bg-blue-600 p-2 rounded-lg mr-3">
               <FaTshirt className="text-white text-2xl" />
             </div>
-            <h2 className="text-2xl font-bold text-white">MerchHub</h2>
+            <h2 className="text-xl font-bold text-white">Dreadnotes</h2>
           </div>
-          <p className="text-sm leading-relaxed mb-6">
+          <p className="text-sm leading-relaxed mb-4">
             Creating custom merchandise that tells your story. Premium quality products with fast delivery and exceptional customer service.
           </p>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <h3 className="text-lg font-semibold text-white mb-3">Payment Methods</h3>
             <div className="flex flex-wrap gap-2">
               {[...Array(6)].map((_, i) => (
@@ -77,7 +74,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold text-white mb-3">Download Our App</h3>
             <div className="flex gap-3">
               <button className="bg-gray-800 hover:bg-gray-700 transition p-3 rounded-lg flex items-center">
@@ -104,12 +101,11 @@ const Footer = () => {
                 </div>
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
 
-        {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-gray-700">Shop Categories</h3>
+          <h3 className="text-lg font-semibold text-white mb-2 pb-2 border-b border-gray-700">Shop Categories</h3>
           <ul className="space-y-3">
             {[
               "Custom T-Shirts",
@@ -131,9 +127,8 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Customer Service */}
         <div>
-          <h3 className="text-lg font-semibold text-white mb-4 pb-2 border-b border-gray-700">Customer Service</h3>
+          <h3 className="text-lg font-semibold text-white mb-2 pb-2 border-b border-gray-700">Customer Service</h3>
           <ul className="space-y-3">
             {[
               "Contact Us",
@@ -155,10 +150,9 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Newsletter */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Join Our Newsletter</h3>
-          <p className="text-sm mb-4">
+          <p className="text-sm mb-2">
             Subscribe to get special offers, free giveaways, and new product alerts
           </p>
 
@@ -167,14 +161,14 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
               <button
                 type="submit"
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </button>
@@ -182,7 +176,7 @@ const Footer = () => {
           </form>
 
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Follow Us</h3>
+            <h3 className="text-lg font-semibold text-white mb-2">Follow Us</h3>
             <div className="flex space-x-4">
               {[
                 { icon: <FaFacebookF />, color: "bg-blue-600", label: "Facebook" },
@@ -204,13 +198,12 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-gray-700 py-6">
+      <div className="border-t border-gray-700 py-2">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-2">
             <div className="text-center md:text-left">
               <p className="text-sm text-gray-500">
-                &copy; {new Date().getFullYear()} MerchHub. All rights reserved.
+                &copy; {new Date().getFullYear()} Dreadnotes Company. All rights reserved.
               </p>
             </div>
 
@@ -221,23 +214,10 @@ const Footer = () => {
               <a href="/privacy" className="text-gray-400 hover:text-white transition text-sm">
                 Privacy Policy
               </a>
-              <a href="/cookies" className="text-gray-400 hover:text-white transition text-sm">
-                Cookie Policy
-              </a>
+            
               <a href="/sitemap" className="text-gray-400 hover:text-white transition text-sm">
                 Sitemap
               </a>
-              <a href="/affiliates" className="text-gray-400 hover:text-white transition text-sm">
-                Affiliate Program
-              </a>
-            </div>
-
-            <div className="flex items-center">
-              <div className="flex items-center mr-4">
-                <div className="w-3 h-3 bg-green-500 rounded-full mr-2 animate-pulse"></div>
-                <span className="text-sm">Secure Connection</span>
-              </div>
-              <span className="text-sm">SSL Encrypted</span>
             </div>
           </div>
         </div>

@@ -1,92 +1,167 @@
-import React, { useRef } from "react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, ShoppingBag, Truck, Shield, Star } from "lucide-react";
 
-const images = [
-  {
-    src: "https://res.cloudinary.com/db5pgr14l/image/upload/v1747663591/djywuggrs4dab1guaylb.jpg",
-    title: "Buy Any Item",
-    description: "Explore various categories and shop easily from trusted sellers.",
-  },
-  {
-    src: "https://res.cloudinary.com/db5pgr14l/image/upload/v1747666652/kg91sebe32uimfcaf0zt.jpg",
-    title: "Customize Your Brand",
-    description: "Design and launch your own merchandise or brand.",
-  },
-  {
-    src: "https://res.cloudinary.com/db5pgr14l/image/upload/v1747663591/djywuggrs4dab1guaylb.jpg",
-    title: "Flash Sales",
-    description: "Enjoy limited-time deals and discounts from top sellers.",
-  },
-  {
-    src: "https://res.cloudinary.com/db5pgr14l/image/upload/v1747666652/kg91sebe32uimfcaf0zt.jpg",
-    title: "24/7 Support",
-    description: "Get assistance whenever you need it from our dedicated team.",
-  },
-];
+export default function ProfessionalHero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-const Hero = () => {
-  const scrollRef = useRef(null);
-
-  const scroll = (direction) => {
-    const container = scrollRef.current;
-    const scrollAmount = container.offsetWidth;
-    if (direction === "next") {
-      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    } else {
-      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+  const slides = [
+    {
+      image: "https://res.cloudinary.com/db5pgr14l/image/upload/v1758188382/Capture_nrep4l.png",
+      title: "Elevate Your Style",
+      subtitle: "Premium caps, t-shirts & hoodies that speak quality",
+      badge: "New Collection",
+      cta: "Shop Now",
+      features: ["100% Cotton", "Kenyan Made", "Free Returns"]
+    },
+    {
+      image: "https://res.cloudinary.com/db5pgr14l/image/upload/v1758184981/IMG-20250918-WA0042_nhxla6.jpg",
+      title: "Fast Nationwide Delivery",
+      subtitle: "Get your merchandise in 2-3 days across Kenya",
+      badge: "Free Shipping",
+      cta: "Browse Products",
+      features: ["47 Counties", "Tracked Delivery", "Secure Packaging"]
+    },
+    {
+      image: "https://res.cloudinary.com/db5pgr14l/image/upload/v1758188382/Capture_nrep4l.png",
+      title: "Limited Edition Designs",
+      subtitle: "Exclusive prints you won't find anywhere else",
+      badge: "Limited Stock",
+      cta: "View Designs",
+      features: ["Exclusive Art", "Limited Runs", "Collector Items"]
     }
-  };
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <div className="bg-white py-2 px-4 md:px-10 flex flex-col items-center w-full relative">
-      {/* Hide scrollbar styles */}
-      <style>{`
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
-
-      <h2 className="text-2xl font-extrabold text-center text-blue-800 mb-2">
-        Discover Our Core Offerings
-      </h2>
-
-      <div className="relative w-full overflow-hidden">
-        {/* Buttons (Only show on small screens) */}
-        <button
-          onClick={() => scroll("back")}
-          className="absolute z-10 left-2 top-1/2 transform -translate-y-1/2 bg-blue-700 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-blue-800 block sm:hidden"
-        >
-          ‹
-        </button>
-        <button
-          onClick={() => scroll("next")}
-          className="absolute z-10 right-2 top-1/2 transform -translate-y-1/2 bg-blue-700 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-blue-800 block sm:hidden"
-        >
-          ›
-        </button>
-
-        <div
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-2 no-scrollbar"
-        >
-          {images.map((img, index) => (
+    <section className="relative w-full md:w-11/12 max-w-6xl h-[75vh] mx-auto  overflow-hidden md:rounded-2xl shadow-2xl bg-gray-900">
+      {/* Slides Container */}
+      <div
+        className="flex transition-transform duration-700 ease-out h-full"
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+      >
+        {slides.map((slide, index) => (
+          <div key={index} className="w-full h-full flex-shrink-0 relative">
+            {/* Background Image with Gradient Overlay */}
             <div
-              key={index}
-              className="relative snap-center min-w-full sm:min-w-[280px] sm:max-w-sm overflow-hidden shadow-lg flex-shrink-0"
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url('${slide.image}')` }}
             >
-              <img
-                src={img.src}
-                alt={img.title}
-                className="w-full h-60 object-cover"
-              />
-              <div className="absolute inset-0  bg-opacity-40 flex flex-col justify-center items-center px-4 text-center text-white">
-                <h3 className="text-xl font-semibold">{img.title}</h3>
-                <p className="text-sm">{img.description}</p>
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+            </div>
+
+            {/* Content Overlay */}
+            <div className="absolute inset-0 flex items-center">
+              <div className="max-w-2xl ml-12 text-white space-y-6">
+                {/* Badge */}
+                <span className="inline-block bg-gradient-to-r from-green-500 to-yellow-500 px-4 py-2 rounded-full text-sm font-semibold">
+                  {slide.badge}
+                </span>
+
+                {/* Main Title */}
+                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                  {slide.title}
+                </h1>
+
+                {/* Subtitle */}
+                <p className="text-xl lg:text-2xl opacity-90 max-w-md">
+                  {slide.subtitle}
+                </p>
+
+                {/* Features List */}
+                <div className="flex flex-wrap gap-3">
+                  {slide.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full">
+                      <Star className="w-3 h-3 text-yellow-400 mr-2" />
+                      <span className="text-sm">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA Button */}
+                <button className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-4 rounded-xl font-bold text-lg flex items-center space-x-2 transition-all duration-300 hover:scale-105 hover:shadow-2xl mt-4">
+                  <ShoppingBag className="w-5 h-5" />
+                  <span>{slide.cta}</span>
+                </button>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Trust Bar */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md border-t border-white/20">
+        <div className="max-w-4xl mx-auto px-8 py-4">
+          <div className="grid grid-cols-3 gap-8 text-center">
+            <div className="flex items-center justify-center space-x-2 text-white">
+              <Truck className="w-5 h-5 text-green-400" />
+              <span className="text-sm font-medium">Free Delivery in Nairobi</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2 text-white">
+              <Shield className="w-5 h-5 text-yellow-400" />
+              <span className="text-sm font-medium">Quality Guarantee</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2 text-white">
+              <Star className="w-5 h-5 text-green-400" />
+              <span className="text-sm font-medium">4.8/5 Rating</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
 
-export default Hero;
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-lg rounded-full p-3 transition-all duration-300 hover:scale-110 group"
+      >
+        <ChevronLeft className="w-6 h-6 text-white group-hover:text-yellow-400" />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-lg rounded-full p-3 transition-all duration-300 hover:scale-110 group"
+      >
+        <ChevronRight className="w-6 h-6 text-white group-hover:text-yellow-400" />
+      </button>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-3">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide
+                ? 'bg-yellow-400 scale-125'
+                : 'bg-white/50 hover:bg-white/80'
+              }`}
+          />
+        ))}
+      </div>
+
+      {/* Quick Shop Categories */}
+      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 hidden lg:block">
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+          <h3 className="text-white font-semibold mb-4 text-center">Shop Categories</h3>
+          <div className="space-y-3">
+            {['Caps', 'T-Shirts', 'Hoodies', 'Bottles', 'Socks'].map((category) => (
+              <button
+                key={category}
+                className="block w-full text-left text-white/80 hover:text-yellow-400 hover:bg-white/5 px-3 py-2 rounded-lg transition-all duration-200"
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

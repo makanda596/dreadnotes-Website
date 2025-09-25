@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
         default: null
     },
     cart:{type:mongoose.Schema.Types.ObjectId ,ref:"Cart"},
-    order:{type:mongoose.Schema.Types.ObjectId, ref:"Order"},
+    // order:{type:mongoose.Schema.Types.ObjectId, ref:"Order"},
     cancelledOrders: { type: mongoose.Schema.Types.ObjectId, ref: "CancelledOrder" },
     reviewStatus:{
         type:Boolean,

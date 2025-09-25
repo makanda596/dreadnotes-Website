@@ -1,16 +1,17 @@
 import {Product} from "../../Schema/Admin/Item.js"
 
 export const postProduct = async(req,res)=>{
-    const {name,desc,status,category,size,price}=req.body
+    const { name, desc, status, category, size, price, brandType }=req.body
 
     try{
-        if (!name || !desc || !status || !category || !size || !price){
+        if (!name || !desc || !status || !brandType || !category || !size || !price){
             return res.json({message:"please fill all fields"})
         }
         const product = new Product({
-            name,
+            name, 
             desc,
             status,
+            brandType,
             category,
             size,
             price

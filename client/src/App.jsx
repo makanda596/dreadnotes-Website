@@ -12,19 +12,21 @@ import About from './pages/About.jsx';
 import Terms from './pages/Terms.jsx'
 // Protected route wrapper
 const ProtectedRoutes = ({ children }) => {
-  const { isAthenticated, isCheckingAuth } = userAuthStore();
+  const { isAuthenticated, isCheckingAuth } = userAuthStore();
 
   if (isCheckingAuth) return <Loading />;
-  if (!isAthenticated) return <Navigate to="/" replace />;
+  if (isAuthenticated) return <Navigate to="/home" replace />;
   return children;
 };
 
 // Redirect if already logged in
 const RedirectUser = ({ children }) => {
-  const { isAthenticated, isCheckingAuth } = userAuthStore();
+  const { isAuthenticated, isCheckingAuth } = userAuthStore();
 
   if (isCheckingAuth) return <Loading />;
-  if (isAthenticated) return <Navigate to="/home" replace />;
+  if (isAuthenticated) {
+    return <Navigate to="/home" replace />;
+  }
   return children;
 };
 
@@ -44,7 +46,7 @@ function App() {
         {/* ✅ FIXED: dynamic product route */}
         <Route path="/product/:id" element={<OneProduct/>} />
       </Routes>
-    </Router>
+    </Router> 
   );
 }
 

@@ -56,7 +56,7 @@ export const UserLogin = async(req,res)=>{
             httpOnly:true,
             maxAge:24*60*60*1000,
             sameSite:"strict",
-            secure:true,
+            secure:false,
         })
         return token
         }catch(error){
@@ -67,7 +67,7 @@ export const UserLogin = async(req,res)=>{
     try{
         const user = await User.findOne({email})
         if(!user){
-            return res.status(201).json({message:"email does not exist"})
+            return res.status(404).json({message:"email does not exist"})
         }
         const comparePassword = await bcrypt.compare(password, user.password)
         if(!comparePassword){
@@ -76,15 +76,21 @@ export const UserLogin = async(req,res)=>{
 
         user.lastLogin = Date.now()
         console.log(user)
+        await user.save()
 
         res.status(200).json({message:"user logged in Succesfully",
+            user: {
+                id: user._id,
+                email: user.email,
+                lastLogin: user.lastLogin,
+              },
             token:generateToken(user._id)})
     }catch(error){
-        res.status(400).json(error.message)
+        res.status(400).json({ message: error.message });
     }
 }
 
-export const logout = async (req, res) => {
+ export const logout = async (req, res) => {
     try {
         res.clearCookie("token",
             {
@@ -97,4 +103,30 @@ export const logout = async (req, res) => {
 
     }
 }
+export const checkAuth = async (req, res) => {
 
+    try {
+        const existinguser = await User.findById(req.user.id).select("-password");
+        if (!existinguser) {
+            return res.status(400).json({ success: false, message: "User not found" });
+        }
+
+        res.status(200).json({ success: true, user: existinguser });
+    } catch (error) {
+        console.log("Error in checkAuth ", error);
+        res.status(400).json({ success: false, message: error.message });
+    }
+};
+export const profile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select("-password");
+        if (!user) {
+            return res.status(404).json({ message: "No user found" });
+        }
+        res.status(200).json({ mesage: "user information", user })
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: error.message });
+    }
+};

@@ -9,7 +9,6 @@ const About = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
-  // Stats with target values for counters
   const [stats, setStats] = useState([
     { value: 0, target: 48, label: "Production Time", suffix: "hrs", isNumber: true },
     { value: 0, target: 98, label: "Happy Customers", suffix: "%", isNumber: true },
@@ -20,10 +19,9 @@ const About = () => {
   const statsRef = useRef(null);
   const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
 
-  // Animate counters when stats section comes into view
   useEffect(() => {
     if (isStatsInView) {
-      const duration = 2000; // Animation duration in ms
+      const duration = 2000;
       const startTime = Date.now();
 
       const animateCounters = () => {
@@ -101,16 +99,12 @@ const About = () => {
     <div>
       <Navbar/>
     <div className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
-         {/* Hero Section */}
         <div className="relative overflow-hidden min-h-screen flex items-center">
-          {/* Background gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 to-blue-100 z-0"></div>
 
-          {/* Decorative elements */}
           <div className="absolute top-20 right-10 w-72 h-72 bg-indigo-200 rounded-full filter blur-[100px] opacity-40"></div>
           <div className="absolute bottom-10 left-10 w-96 h-96 bg-blue-200 rounded-full filter blur-[100px] opacity-40"></div>
 
-          {/* Floating product cards */}
           <div className="absolute top-1/4 left-5 w-40 h-40 md:w-56 md:h-56">
             <motion.div
               initial={{ y: 100, opacity: 0 }}
@@ -150,10 +144,8 @@ const About = () => {
             </motion.div>
           </div>
 
-          {/* Main content */}
           <div className="max-w-7xl mx-auto px-4 py-20 md:py-28 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Text content */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -170,7 +162,7 @@ const About = () => {
                 </motion.div>
 
                 <motion.h1
-                  className="text-4xl md:text-6xl font-bold mb-6 text-gray-900"
+                  className="text-xl md:text-xl font-bold mb-2 text-gray-900"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.8 }}
@@ -182,7 +174,7 @@ const About = () => {
                 </motion.h1>
 
                 <motion.p
-                  className="text-xl text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0"
+                  className="text-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
@@ -197,15 +189,14 @@ const About = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.6 }}
                 >
-                  <button className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  <button className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-2 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                     Start Creating
                   </button>
-                  <button className="bg-white text-indigo-600 border-2 border-indigo-600 px-8 py-4 rounded-full font-semibold text-lg shadow hover:shadow-md transition-all duration-300 hover:bg-indigo-50">
+                  <button className="bg-white text-indigo-600 border-2 border-indigo-600 px-6 py-2 rounded-full font-semibold text-lg shadow hover:shadow-md transition-all duration-300 hover:bg-indigo-50">
                     Shop Collection
                   </button>
                 </motion.div>
 
-                {/* Stats */}
                 <motion.div
                   className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-lg"
                   initial={{ opacity: 0 }}
@@ -227,7 +218,6 @@ const About = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Product showcase */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -244,7 +234,7 @@ const About = () => {
                   >
                     <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-600 flex flex-col items-center justify-center p-6 relative">
                       <div className="text-white text-center mb-6">
-                        <div className="text-2xl font-bold mb-2">Premium Hoodie</div>
+                        <div className="text-xl font-bold mb-2">Premium Hoodie</div>
                         <div className="text-blue-100">Customize your own design</div>
                       </div>
                       <FaTshirt className="text-white text-8xl mb-4" />
@@ -257,7 +247,6 @@ const About = () => {
                     </div>
                   </motion.div>
 
-                  {/* Secondary product cards */}
                   <motion.div
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -289,7 +278,6 @@ const About = () => {
                   </motion.div>
                 </div>
 
-                {/* Floating discount badge */}
                 <motion.div
                   initial={{ scale: 0, rotate: -20 }}
                   animate={{ scale: 1, rotate: 0 }}
@@ -303,7 +291,6 @@ const About = () => {
               </motion.div>
             </div>
 
-            {/* Encouragement text */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -317,41 +304,41 @@ const About = () => {
                 </div>
               </div>
 
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-xl font-bold text-gray-900 mb-2">
                 Why Shop With DreadNotes?
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                <div className="bg-white p-6 rounded-2xl shadow-md">
-                  <div className="bg-indigo-100 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                <div className="bg-white p-2 rounded-2xl shadow-md">
+                  <div className="bg-indigo-100 w-14 h-14 rounded-full flex items-center justify-center mb-2 mx-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Premium Quality</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Premium Quality</h3>
                   <p className="text-gray-600">
                     Crafted with high-quality materials that last, ensuring your merch looks great wash after wash.
                   </p>
                 </div>
 
-                <div className="bg-white p-6 rounded-2xl shadow-md">
-                  <div className="bg-indigo-100 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                <div className="bg-white p-2 rounded-2xl shadow-md">
+                  <div className="bg-indigo-100 w-14 h-14 rounded-full flex items-center justify-center mb-2 mx-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Fast Delivery</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Fast Delivery</h3>
                   <p className="text-gray-600">
                     Get your custom merch in 3-5 days with our efficient production and delivery network.
                   </p>
                 </div>
 
-                <div className="bg-white p-6 rounded-2xl shadow-md">
-                  <div className="bg-indigo-100 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                <div className="bg-white p-2 rounded-2xl shadow-md">
+                  <div className="bg-indigo-100 w-14 h-14 rounded-full flex items-center justify-center mb-2 mx-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Easy Returns</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Easy Returns</h3>
                   <p className="text-gray-600">
                     30-day hassle-free returns if you're not completely satisfied with your purchase.
                   </p>
@@ -361,8 +348,7 @@ const About = () => {
           </div>
         </div>
 
-      {/* Process Section */}
-      <div className="py-16 px-4 bg-white">
+      <div className="py-6 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -371,16 +357,15 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl md:text-xl font-bold text-gray-900 mb-2">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Our seamless process makes creating and receiving your custom merchandise effortless
             </p>
           </motion.div>
 
           <div className="relative">
-            {/* Progress bar */}
             <div className="absolute top-12 left-0 right-0 h-1 bg-gray-200 hidden md:block">
               <motion.div
                 className="h-full bg-gradient-to-r from-blue-500 to-indigo-600"
@@ -391,7 +376,7 @@ const About = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative z-10">
               {processSteps.map((step, index) => (
                 <motion.div
                   key={index}
@@ -418,20 +403,19 @@ const About = () => {
             </div>
           </div>
 
-          {/* Process Details */}
           <motion.div
-            className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 md:p-12"
+            className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 md:p12"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
                   {processSteps[currentStep].title}
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="text-gray-600 mb-2">
                   {processSteps[currentStep].description}
                 </p>
                 <ul className="space-y-3 mb-6">
@@ -476,7 +460,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* Stats Section with Animated Counters */}
       <div
         ref={statsRef}
         className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white"
@@ -518,20 +501,19 @@ const About = () => {
         </div>
       </div>
 
-      {/* Testimonials */}
-      <div className="py-16 bg-white">
+      <div className="py-6 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-4"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl md:text-xl font-bold text-gray-900 mb-2">
               What Our Customers Say
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Join thousands of satisfied customers who've created their perfect merchandise
             </p>
           </motion.div>
@@ -590,7 +572,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
       
     </div>
 <Footer/>
